@@ -1,6 +1,6 @@
 # todo_app
 
-splash screen
+
 
 A new Flutter project.
 
