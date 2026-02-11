@@ -1,13 +1,13 @@
 
-
 import 'package:flutter/cupertino.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:todo_app/core/app_constants.dart';
-import 'package:todo_app/features/Auth/models/user_model.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_app/features/auth/models/user_model.dart';
 import 'package:todo_app/todo_app.dart';
 
+import 'core/app_constants.dart';
+
 void main()async{
-  await Hive.initFlutter();
+  await Hive.initFlutter();//3
   Hive.registerAdapter(UserModelAdapter());
   await Hive.openBox<UserModel>(AppConstants.userBox);
   runApp(TodoApp());

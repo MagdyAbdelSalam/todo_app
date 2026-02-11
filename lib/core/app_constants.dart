@@ -1,3 +1,7 @@
-class AppConstants{
-  static const String userBox = 'User';
+
+class AppConstants
+{
+
+  static const String userBox="User";
+
 }

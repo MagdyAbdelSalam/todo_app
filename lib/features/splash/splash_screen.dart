@@ -1,7 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
-import 'package:todo_app/features/Auth/Auht_screen.dart';
+import 'package:todo_app/features/auth/models/user_model.dart';
+import 'package:todo_app/features/home/home_screen.dart';
+import '../../core/app_constants.dart';
+import '../Auth/Auht_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -12,10 +17,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 4),(){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> AuhtScreen()));
+    Future.delayed(Duration(seconds: 3),(){
+      print("test${Hive.box<UserModel>(AppConstants.userBox).isEmpty}");
+      if(Hive.box<UserModel>(AppConstants.userBox).isEmpty){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AuthScreen()));
+      }else{
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+
+      }
 
     });
     super.initState();
@@ -24,17 +36,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          Lottie.asset("assets/images/splash_image.json"),
+            Lottie.asset("assets/splash_image.json"),
             Text("Taskati",style: TextStyle(
-              fontSize: 25.sp,
-              fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold
             ),),
-            Text("it's time get organized",style: TextStyle(
-              fontSize: 18.sp,
+            Text("it's time to get organized",style: TextStyle(
+                fontSize: 18.sp
             ),)
           ],
         ),
